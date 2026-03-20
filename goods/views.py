@@ -70,7 +70,7 @@ def goods_api_list(request):
             'category_name': goods.category.name if goods.category else '未分类',
             'seller': goods.user.username if goods.user else '未知用户',
             'created_at': goods.created_at.strftime('%Y-%m-%d %H:%M'),
-            'image': goods.image.url if goods.image else '',
+            'image': goods.image_url if goods.image_url else (goods.image.url if goods.image else ''),
         })
 
     return JsonResponse({
@@ -95,7 +95,7 @@ def goods_create(request):
         price_text = request.POST.get('price', '').strip()
         contact = request.POST.get('contact', '').strip()
         category_id = request.POST.get('category', '').strip()
-        image = request.FILES.get('image')
+        image_url = request.POST.get('image_url', '').strip()
 
         if not title or not description or not contact or not category_id:
             return render(request, 'goods_create.html', {
@@ -136,7 +136,7 @@ def goods_create(request):
             contact=contact,
             user=user,
             category=category,
-            image=image
+            image_url=image_url
         )
         return redirect('/goods/list/')
 

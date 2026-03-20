@@ -142,7 +142,9 @@
                 {% for item in favorite_list %}
                     <div class="col-md-6 col-lg-4">
                         <div class="goods-card">
-                            {% if item.goods.image %}
+                            {% if item.goods.image_url %}
+                                <img src="{{ item.goods.image_url }}" alt="{{ item.goods.title }}" class="goods-image">
+                            {% elif item.goods.image %}
                                 <img src="{{ item.goods.image.url }}" alt="{{ item.goods.title }}" class="goods-image">
                             {% else %}
                                 <img src="https://via.placeholder.com/600x400?text=No+Image" alt="{{ item.goods.title }}" class="goods-image">
