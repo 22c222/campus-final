@@ -2,4 +2,5 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "python manage.py migrate && gunicorn campus_market.wsgi:application"
+[deploy]
+startCommand = "python manage.py migrate && python manage.py shell -c \"from django.contrib.auth.models import User; u, created = User.objects.get_or_create(username='admin'); u.is_staff=True; u.is_superuser=True; u.is_active=True; u.set_password('12345678'); u.save()\" && gunicorn campus_market.wsgi:application"
