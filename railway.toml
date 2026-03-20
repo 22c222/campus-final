@@ -2,6 +2,4 @@
 builder = "NIXPACKS"
 
 [deploy]
-[deploy]
-[deploy]
 startCommand = "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn campus_market.wsgi:application"
