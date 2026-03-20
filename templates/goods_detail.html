@@ -76,9 +76,7 @@
     <div class="detail-card">
         <div class="row g-4">
             <div class="col-md-5">
-                {% if goods.image_url %}
-                    <img class="product-image" src="{{ goods.image_url }}" alt="{{ goods.title }}">
-                {% elif goods.image %}
+                {% if goods.image %}
                     <img class="product-image" src="{{ goods.image.url }}" alt="{{ goods.title }}">
                 {% else %}
                     <img class="product-image" src="https://via.placeholder.com/500x400?text=No+Image" alt="{{ goods.title }}">

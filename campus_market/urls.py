@@ -3,7 +3,6 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import redirect
-from django.contrib import admin
 
 admin.site.site_header = "校园二手平台后台管理"
 admin.site.site_title = "校园二手平台后台"
@@ -23,5 +22,4 @@ urlpatterns = [
     path('favorites/', include('favorites.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

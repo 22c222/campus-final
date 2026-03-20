@@ -31,6 +31,7 @@
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label">商品名称</label>
@@ -97,16 +98,10 @@
                 </div>
 
                 <div class="col-12">
-                    <label class="form-label">图片链接</label>
-                    <input
-                        type="url"
-                        name="image_url"
-                        class="form-control"
-                        placeholder="请输入图片网址，例如 https://xxx.com/demo.jpg"
-                    value="{{ form_data.image_url|default:'' }}"
-                >
-                <div class="form-text">建议填写以 http:// 或 https:// 开头的图片地址</div>
-            </div>
+                    <label class="form-label">商品图片</label>
+                    <input type="file" name="image" class="form-control" accept="image/*">
+                    <div class="form-text">支持用户从本地选择图片文件上传</div>
+                </div>
             </div>
 
             <div class="mt-4 d-flex gap-2">

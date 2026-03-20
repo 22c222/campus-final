@@ -12,13 +12,6 @@ MAX_PRICE = Decimal("99999999.99")
 
 
 def validate_price(price_text):
-    """
-    校验价格是否合法：
-    1. 不能为空
-    2. 必须是数字
-    3. 必须大于等于 0
-    4. 不能超过 DecimalField 的允许范围
-    """
     if not price_text:
         return False, "价格不能为空", None
 
@@ -70,7 +63,7 @@ def goods_api_list(request):
             'category_name': goods.category.name if goods.category else '未分类',
             'seller': goods.user.username if goods.user else '未知用户',
             'created_at': goods.created_at.strftime('%Y-%m-%d %H:%M'),
-            'image': goods.image_url if goods.image_url else (goods.image.url if goods.image else ''),
+            'image': goods.image.url if goods.image else '',
         })
 
     return JsonResponse({
@@ -95,7 +88,7 @@ def goods_create(request):
         price_text = request.POST.get('price', '').strip()
         contact = request.POST.get('contact', '').strip()
         category_id = request.POST.get('category', '').strip()
-        image_url = request.POST.get('image_url', '').strip()
+        image = request.FILES.get('image')
 
         if not title or not description or not contact or not category_id:
             return render(request, 'goods_create.html', {
@@ -136,7 +129,7 @@ def goods_create(request):
             contact=contact,
             user=user,
             category=category,
-            image_url=image_url
+            image=image
         )
         return redirect('/goods/list/')
 
@@ -200,6 +193,7 @@ def goods_update(request, goods_id):
         price_text = request.POST.get('price', '').strip()
         contact = request.POST.get('contact', '').strip()
         category_id = request.POST.get('category', '').strip()
+        image = request.FILES.get('image')
 
         if not title or not description or not contact or not category_id:
             return render(request, 'goods_update.html', {
@@ -224,7 +218,6 @@ def goods_update(request, goods_id):
         goods.contact = contact
         goods.category = get_object_or_404(Category, id=category_id)
 
-        image = request.FILES.get('image')
         if image:
             goods.image = image
 
