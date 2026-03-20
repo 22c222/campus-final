@@ -1,0 +1,1 @@
+web: gunicorn campus_market.wsgi:application
