@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>修改商品</title>
+</head>
+<body>
+    <div style="padding:10px; border-bottom:1px solid #ccc; margin-bottom:20px;">
+        <a href="/goods/list/">商品列表</a>
+        <a href="/goods/create/" style="margin-left:10px;">发布商品</a>
+        <a href="/goods/my/" style="margin-left:10px;">我的发布</a>
+
+        {% if username %}
+            <span style="margin-left:20px;">当前用户：{{ username }}</span>
+            <a href="/users/logout/" style="margin-left:10px;">退出登录</a>
+        {% else %}
+            <a href="/users/login/" style="margin-left:20px;">登录</a>
+            <a href="/users/register/" style="margin-left:10px;">注册</a>
+        {% endif %}
+    </div>
+
+    <h1>修改商品</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <p>
+            商品标题：
+            <input type="text" name="title" value="{{ goods.title }}">
+        </p>
+
+        <p>
+            商品描述：
+            <textarea name="description">{{ goods.description }}</textarea>
+        </p>
+
+        <p>
+            价格：
+            <input
+                type="number"
+                step="0.01"
+                min="0"
+                max="99999999.99"
+                name="price"
+                class="form-control"
+                value="{{ goods.price }}"
+                required
+            >
+            <div class="form-text">价格范围：0 ~ 99999999.99</div>
+        </p>
+
+        <p>
+            联系方式：
+            <input type="text" name="contact" value="{{ goods.contact }}">
+        </p>
+
+        <p>
+            商品分类：
+            <select name="category">
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if goods.category.id == category.id %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <button type="submit">保存修改</button>
+    </form>
+
+    <p><a href="/goods/detail/{{ goods.id }}/">返回商品详情</a></p>
+</body>
+</html>
