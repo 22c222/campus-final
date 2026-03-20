@@ -3,6 +3,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import redirect
+from django.contrib import admin
+
+admin.site.site_header = "校园二手平台后台管理"
+admin.site.site_title = "校园二手平台后台"
+admin.site.index_title = "后台首页"
 
 
 def home(request):

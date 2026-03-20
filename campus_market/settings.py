@@ -14,17 +14,50 @@ CSRF_TRUSTED_ORIGINS = os.getenv(
 ).split(",")
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'users',
-    'goods',
-    'favorites',
-    'comments',
+    "jazzmin",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "users",
+    "goods",
+    "favorites",
+    "comments",
 ]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "校园二手平台后台",
+    "site_header": "校园二手平台后台",
+    "site_brand": "Campus Final",
+    "welcome_sign": "欢迎进入校园二手平台管理系统",
+    "copyright": "campus-final",
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "order_with_respect_to": ["goods", "comments", "favorites", "users", "auth"],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "goods": "fas fa-boxes",
+        "goods.Goods": "fas fa-box",
+        "goods.Category": "fas fa-tags",
+        "comments": "fas fa-comments",
+        "comments.Comment": "fas fa-comment-dots",
+        "favorites": "fas fa-heart",
+        "favorites.Favorite": "fas fa-heart",
+        "users": "fas fa-user-circle",
+        "users.MarketUser": "fas fa-user",
+    },
+    "topmenu_links": [
+        {"name": "前台首页", "url": "/goods/list/", "new_window": True},
+        {"model": "goods.Goods"},
+        {"model": "comments.Comment"},
+        {"model": "favorites.Favorite"},
+        {"model": "users.MarketUser"},
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
